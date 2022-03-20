@@ -4,14 +4,14 @@ import model.PersonEntity;
 
 public class IncomeTaxController {
 
-    public Double getCleanIncome(PersonEntity person) {
-        Double bruto = 0.0, mandatoryFees = 0.0;
+    public Double getNetIncome(PersonEntity person) {
+        Double gross = 0.0, mandatoryFees = 0.0;
 
-        bruto = person.getBruto().getBruto();
+        gross = person.getGross().getGross();
         for(Double mandatoryFee : person.getMandatoryFees().getMandatoryFees()) {
             mandatoryFees += mandatoryFee;
         }
 
-        return bruto - mandatoryFees;
+        return gross - mandatoryFees;
     }
 }
