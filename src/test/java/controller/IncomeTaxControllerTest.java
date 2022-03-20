@@ -4,6 +4,7 @@ import exception.ValidationException;
 import model.PersonEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vo.AssessableStatus;
 import vo.Gross;
 import vo.MandatoryFees;
 
@@ -25,16 +26,44 @@ class IncomeTaxControllerTest {
 
     @Test
     void itShouldCalculateNetIncome() throws Exception {
-        Double gross = 100.0;
+        Double gross = 100000000.0;
         List<Double> mandatoryFees = new ArrayList<>();
-        mandatoryFees.add(35.0);
-        mandatoryFees.add(5.0);
-        mandatoryFees.add(10.0);
+        mandatoryFees.add(35000000.0);
+        mandatoryFees.add(5000000.0);
+        mandatoryFees.add(10000000.0);
 
         person.setGross(new Gross(gross));
         person.setMandatoryFees(new MandatoryFees(mandatoryFees));
-        Double expected = 50.0;
+        Double expected = 50000000.0;
         Double actual = incomeTaxController.getNetIncome(person);
+
+        assertEquals(expected, actual, 0.0001);
+    }
+
+    @Test
+    void itShouldCalculateNonTaxableIncome() throws Exception {
+        person.setAssessableStatus(new AssessableStatus(true, 4));
+
+        Double expected = 54000000.0 + 4500000.0 + (3 * 4500000);
+        Double actual = incomeTaxController.getNonTaxableIncome(person);
+
+        assertEquals(expected, actual, 0.0001);
+    }
+
+    @Test
+    void itShouldCalculateTaxableIncome() throws Exception {
+        Double gross = 100000000.0;
+        List<Double> mandatoryFees = new ArrayList<>();
+        mandatoryFees.add(35000000.0);
+        mandatoryFees.add(5000000.0);
+        mandatoryFees.add(10000000.0);
+
+        person.setGross(new Gross(gross));
+        person.setMandatoryFees(new MandatoryFees(mandatoryFees));
+        person.setAssessableStatus(new AssessableStatus(true, 4));
+
+        Double expected = (100000000.0 - 35000000.0 - 5000000.0 - 10000000.0) - (54000000.0 + 4500000.0 + (3 * 4500000));
+        Double actual = incomeTaxController.getTaxableIncome(person);
 
         assertEquals(expected, actual, 0.0001);
     }
@@ -53,7 +82,7 @@ class IncomeTaxControllerTest {
 
     @Test
     void itShouldThrowNegativeGrossValidations() throws Exception {
-        Double gross = -100.0;
+        Double gross = -100000000.0;
 
         try {
             person.setGross(new Gross(gross));
@@ -65,7 +94,7 @@ class IncomeTaxControllerTest {
         }
 
         List<Double> mandatoryFees = new ArrayList<>();
-        mandatoryFees.add(-1.0);
+        mandatoryFees.add(-10000000.0);
 
         try {
             person.setMandatoryFees(new MandatoryFees(mandatoryFees));
