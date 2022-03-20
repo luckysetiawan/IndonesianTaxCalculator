@@ -17,7 +17,7 @@ public class IncomeTaxController {
         return gross - mandatoryFees;
     }
 
-    // PTKP (Penghasilan Tidak Kena Pajak
+    // PTKP (Penghasilan Tidak Kena Pajak)
     public Double getNonTaxableIncome(PersonEntity person) {
         Double nonTaxableIncome = Assessable.PERSONAL.getAssessable();
 
@@ -42,6 +42,7 @@ public class IncomeTaxController {
         return netIncome - nonTaxableIncome;
     }
 
+    // Pajak Penghasilan (PPh)
     public Double getIncomeTax(PersonEntity person) {
         // TODO: add income tax calculation
         return 0.0;
