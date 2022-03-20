@@ -81,7 +81,7 @@ class IncomeTaxControllerTest {
     }
 
     @Test
-    void itShouldThrowNegativeGrossValidations() throws Exception {
+    void itShouldThrowNegativeValidations() throws Exception {
         Double gross = -100000000.0;
 
         try {

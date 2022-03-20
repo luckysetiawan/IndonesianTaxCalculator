@@ -30,12 +30,12 @@ public class PropertyTaxController {
         double njop = 0.0;
         double landValue = 0.0, landArea = 0.0;
         double buildingValue = 0.0, buildingArea = 0.0;
-        landValue = property.getLandValue().getLandValue;
-        landArea = property.getLandArea().getLandArea;
-        buildingValue = property.getBuildingValue().getBuildingValue;
-        buildingArea = property.getBuildingArea().getBuildingArea;
+        landValue = property.getLandValue().getLandValue();
+        landArea = property.getLandArea().getLandArea();
+        buildingValue = property.getBuildingValue().getBuildingValue();
+        buildingArea = property.getBuildingArea().getBuildingArea();
 
-        njop = (landValue*landArea) + (buildingValue*buildingArea)
+        njop = (landValue*landArea) + (buildingValue*buildingArea);
         // njop = getLandNJOP(property) + getBuildingNJOP(property);
 
         return njop;
@@ -44,7 +44,7 @@ public class PropertyTaxController {
     //Nilai Jual Kena Pajak
     public Double getNJKP(PropertyEntity property){
         double njkp = 0.0;
-        double njop = getNJOP(property)
+        double njop = getNJOP(property);
         
         njkp =  0.4 * njop;
 
