@@ -42,14 +42,14 @@ class PropertyTaxControllerTest {
     @Test
     void itShouldCalculateNJKP() throws Exception {
         Double expected = 1680.0;
-        Double actual = propertyTaxController.getNJOP(property);
+        Double actual = propertyTaxController.getNJKP(property);
 
         assertEquals(expected, actual, 0.0001);
     }
     @Test
     void itShouldCalculatePBB() throws Exception {
         Double expected = 840.0;
-        Double actual = propertyTaxController.getNJOP(property);
+        Double actual = propertyTaxController.getPBB(property);
 
         assertEquals(expected, actual, 0.0001);
     }
