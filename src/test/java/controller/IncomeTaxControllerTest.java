@@ -51,6 +51,22 @@ class IncomeTaxControllerTest {
     }
 
     @Test
+    void itShouldCalculateIncomeTax() throws Exception {
+        Double gross = 100000000.0;
+        List<Double> mandatoryFees = new ArrayList<>();
+        mandatoryFees.add(35000000.0);
+        mandatoryFees.add(5000000.0);
+        mandatoryFees.add(10000000.0);
+        person.setGross(new Gross(gross));
+        person.setMandatoryFees(new MandatoryFees(mandatoryFees));
+        person.setAssessableStatus(new AssessableStatus(true, 4));
+        Double expected = 50000000 * 0.05;
+        Double actual = incomeTaxController.getIncomeTax(person);
+
+        assertEquals(expected, actual, 0.0001);
+    }
+
+    @Test
     void itShouldCalculateTaxableIncome() throws Exception {
         Double gross = 100000000.0;
         List<Double> mandatoryFees = new ArrayList<>();

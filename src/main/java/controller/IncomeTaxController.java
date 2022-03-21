@@ -44,15 +44,15 @@ public class IncomeTaxController {
 
     // Pajak Penghasilan (PPh)
     public Double getIncomeTax(PersonEntity person) {
-        Double TaxableIncome = getTaxableIncome(person);
-        if (TaxableIncome < 50000000) {
+        Double taxableIncome = getTaxableIncome(person);
+        if (taxableIncome < 50000000.0) {
             return 50000000 * 0.05;
-        } else if (TaxableIncome <= 250000000) {
-            return  TaxableIncome * 0.15;
-        } else if (TaxableIncome <= 500000000) {
-            return TaxableIncome * 0.25;
+        } else if (taxableIncome <= 250000000.0) {
+            return  taxableIncome * 0.15;
+        } else if (taxableIncome <= 500000000.0) {
+            return taxableIncome * 0.25;
         } else {
-            return TaxableIncome * 0.5;
+            return taxableIncome * 0.5;
         }
     }
 }
